@@ -185,8 +185,8 @@ function fmtVerses {
 	esac
 
 }
-function getVerses {
 
+function getVerses {
 
 while read first second third fourth; do
 	## first
@@ -227,13 +227,11 @@ while read first second third fourth; do
 			fi
 
 		elif [[ "${chapterverse}" == *"-"* ]]; then
-			#verse="$verse_all"
 			verse_first=$(echo "${verse_all}" | awk -F'-' '{ print $1 }')
 			verse_last=$(echo "${verse_all}" | awk -F'-' '{ print $2 }')
 			verse_list=$(echo "${verse_last} - ${verse_first} + 1" | bc -l)
 		else
 			verse_list=1
-			#verse_list=${chapterverse}
 		fi
 		
 	fi
@@ -246,7 +244,6 @@ while read first second third fourth; do
 			chapter=$(echo "${chapterverse}" | awk -F':' '{ print $1 }')
 			verse_all=$(echo "${chapterverse}" | awk -F':' '{ print $2 }')
 			if [[ "$verse_all" == *"-"* ]]; then
-				#verse=$verse_all
 				verse_first=$(echo "${verse_all}" | awk -F'-' '{ print $1 }')
 				verse_last=$(echo "${verse_all}" | awk -F'-' '{ print $2 }')
 				verse_list=$(echo "${verse_last} - ${verse_first} + 1" | bc -l)
@@ -255,13 +252,11 @@ while read first second third fourth; do
 				verse_list=1
 			fi
 		elif [[ "${chapterverse}" == *"-"* ]]; then
-			#verse=$verse_all
 			verse_first=$(echo "${verse_all}" | awk -F'-' '{ print $1 }')
 			verse_last=$(echo "${verse_all}" | awk -F'-' '{ print $2 }')
 			verse_list=$(echo "${verse_last} - ${verse_first} + 1" | bc -l)
 		else
 			verse_list=1
-			#verse_list=${chapterverse}
 		fi
 	fi
 	## fourth
@@ -273,32 +268,16 @@ while read first second third fourth; do
 		for verse in `seq $verse_first $verse_last`; do
 			echo "$verse"
 			verse_text=$(curl -s "https://biblehub.com/$trans/$book/$chapter-$verse.htm" | awk -F'title' '{ print $2 }' | sed -e 's/[></]//g' -e '/^$/ d' -e 's/&#8220;/"/g' -e 's/&#8221;/"/g' -e "s/&#8217;/'/g" -e 's/&#8212;/--/g' | awk -F"$(echo ${trans} | tr '[:lower:]' '[:upper:]')" '{ print $NF}' | cut -c 3-)
-			#case ${#verse_text} in
-			#	[0-3]) echo "Verse #$verse not found" ;;
-			#	[4-9]|[0-9][0-9]|1[0-4][0-9]) echo "${verse_text}" | fmt -ns -w $(( $max_width / 2 + 8 )) -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-			#	1[5-9][0-9]|2[0-4][0-9]) echo "${verse_text}" | fmt -ns -w $(( $max_width / 4 * 3 + 2 )) -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-			#	2[5-9][0-9]|[3-9][0-9][0-9]) echo "${verse_text}" | fmt -ns -w ${max_width} -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-			#esac
 			fmtVerses
 		done
 	else
 		echo -e "\n$book_upper $chapter:$verse"
 		verse_text=$(curl -s "https://biblehub.com/$trans/$book/$chapter-$verse.htm" | awk -F'title' '{ print $2 }' | sed -e 's/[></]//g' -e '/^$/ d' -e 's/&#8220;/"/g' -e 's/&#8221;/"/g' -e "s/&#8217;/'/g" -e 's/&#8212;/--/g' | awk -F"$(echo ${trans} | tr '[:lower:]' '[:upper:]')" '{ print $NF}' | cut -c 3-)
-		#case "${#verse_text}" in
-		#	[0-3]) echo "Verse #$verse not found" ;;
-		#	[4-9]|[0-9][0-9]|1[0-4][0-9])
-		#		echo ${verse_text} | fmt -ns -w $(( $max_width / 2 + 8 )) -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-		#	1[5-9][0-9]|2[0-9][0-9])
-		#		echo ${verse_text} | fmt -ns -w $(( $max_width / 4 * 3 + 2 )) -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-		#	[3-9][0-9][0-9])
-		#		echo "${verse_text}" | fmt -ns -w ${max_width} -d '.!?,' | awk '{$1=toupper(substr($1,0,1))substr($1,2)}1' ;;
-		#esac
 		fmtVerses
 	fi
 		
 done
 } #
-#done < <(awk -v var=scripturelist '$0~var' RS= $path_to_verses | grep -v "^#\|Today") > "${path_to_verses}.tmp"
 
 
 ## script begins here either into a file or just std out
@@ -312,11 +291,9 @@ if [[ "$verse_file" == "TRUE" ]]; then
 	rm "${path_to_verses}.tmp"
 else
 	trans=$default_trans
-	#max_width=$(( $(tput cols) / 6 * 5 ))
 	max_width=$(( $(tput cols) / 2 ))
-	#max_width=$(tput cols)
 	getVerses <<< "$@"
 	echo ""
 fi
 
-exit
+exit 0
