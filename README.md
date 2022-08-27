@@ -13,7 +13,25 @@ The script pulls the text(s), then formats according to my setup. AFor instance 
 
 But then I got to thinking that maybe it would be nice if this could also quickly grab a verse/passage and just print it to standard out, so that's in there too.
 
-## Example
+## Getting this script
+
+If you're familiar with Git, clone the repo and then `chmod +x bibleverses.sh` to make it executable.
+
+If you are not familiar with Git:
+
+The easiest way is to click on the raw button on the upper right of the file panel, then copy the text and paste it into a file on your computer. This script is written for Bash, so you'll need either a Mac, Linux, or a PC with Cygwin installed in order to run.
+
+Steps:
+1. Click the raw button
+2. Copy the text
+3. With your favorite text editor, open a new file, paste in the text you copied
+4. Save the file as bibleverses.sh
+5. Open a command prompt (terminal on Mac)
+6. Go to the folder where the file you just created is
+7. Run `chmod +x bibleverses.sh` to make it executable
+8. Then run the script (see Examples below).
+
+## Examples
 
 Basic example to return a verse to standard out:
 ```
@@ -22,12 +40,17 @@ Basic example to return a verse to standard out:
 
 You can specify a translation:
 ```
-./bibleverses.sh 1 Cor 13:12 NIV
+./bibleverses.sh 1 cor 13:12 NIV
 ``` 
 
-To add text to a file:
+To add text to a particular file:
 ```
 ./bibleverses.sh /path/to/file
+``` 
+
+To add text to the default file:
+```
+./bibleverses.sh
 ``` 
  
 ## About the file feature
