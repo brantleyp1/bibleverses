@@ -1,4 +1,4 @@
-# bibleverses
+# Bible verses
 Quickly grab and format one or many verses 
 
 ## Purpose
@@ -31,6 +31,8 @@ To add text to a file:
 ``` 
  
 ## About the file feature
+
+I added a sample file named `verses` that is what the script looks for, but the file name can be changed in the script. 
 
 The file method is pretty particular to my needs, I enter all the passages in order to create a screen at the beginning of the video with all of "today's" scripture, then add and format the text for the video. The file has a couple of tags that it needs to find the text to look up, and then to print the text back to the file. 
 
