@@ -22,14 +22,15 @@ If you are not familiar with Git:
 The easiest way is to click on the raw button on the upper right of the file panel, then copy the text and paste it into a file on your computer. This script is written for Bash, so you'll need either a Mac, Linux, or a PC with Cygwin installed in order to run.
 
 Steps:
-1. Click the raw button
-2. Copy the text
-3. With your favorite text editor, open a new file, paste in the text you copied
-4. Save the file as bibleverses.sh
-5. Open a command prompt (terminal on Mac)
-6. Go to the folder where the file you just created is
-7. Run `chmod +x bibleverses.sh` to make it executable
-8. Then run the script (see Examples below).
+1. Click on the script
+2. Click the raw button
+3. Copy the text
+4. With your favorite text editor, open a new file, paste in the text you copied
+5. Save the file as bibleverses.sh
+6. Open a command prompt (terminal on Mac - HIGHLY recommend iterm2 if on Mac)
+7. Go to the folder where the file you just created is
+8. Run `chmod +x bibleverses.sh` to make it executable
+9. Then run the script (see Examples below).
 
 ## Examples
 
